@@ -13,13 +13,17 @@ export default function BreadCrumb({ links }: Props) {
       {links.map((link, index) => {
         if (index + 1 !== links.length) {
           return (
-            <Link className="breadcrumb-item" to={link.url || ""}>
+            <Link key={index} className="breadcrumb-item" to={link.url || ""}>
               {link.title}
             </Link>
           );
         } else
           return (
-            <span className="breadcrumb-item active" aria-current="page">
+            <span
+              key={index}
+              className="breadcrumb-item active"
+              aria-current="page"
+            >
               {link.title}
             </span>
           );

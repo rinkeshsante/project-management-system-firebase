@@ -1,4 +1,3 @@
-export interface IFeature {
-  id: string;
-  parent: string;
-}
+import { Issue } from "../../lib/models/Issue";
+
+export interface IFeature extends Issue {}
