@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import "./App.css";
-import AppRoutes from "./components/app-routes";
+import AppRoutes from "./components/routing/app-routes";
 import { getFirebaseConfig } from "./firebase-config";
 
 const firebaseAppConfig = getFirebaseConfig();

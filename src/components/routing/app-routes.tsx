@@ -1,10 +1,10 @@
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
-import useUser from "../hooks/useUser";
-import Header from "./elements/header";
-import Projects from "./elements/projects";
-import AccessDenied from "./pages/access-denied";
-import Home from "./pages/home";
-import NotFound from "./pages/not-found";
+import useUser from "../../hooks/useUser";
+import Header from "../elements/header";
+import Projects from "../elements/projects";
+import AccessDenied from "./access-denied";
+import Home from "../features/home";
+import NotFound from "./not-found";
 
 type Props = {};
 
