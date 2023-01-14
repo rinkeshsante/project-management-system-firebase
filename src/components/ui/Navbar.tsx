@@ -1,7 +1,7 @@
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import useUser from "../../hooks/useUser";
 
-export default function Header() {
+export default function Navbar() {
   const provider = new GoogleAuthProvider();
   const { user, auth } = useUser();
 
@@ -25,7 +25,7 @@ export default function Header() {
   }
 
   return (
-    <nav className="navbar navbar-expand-sm navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
       <div className="container">
         <a className="navbar-brand" href="#">
           Navbar
@@ -53,37 +53,23 @@ export default function Header() {
                 Link
               </a>
             </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                id="dropdownId"
-                data-bs-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <div className="dropdown-menu" aria-labelledby="dropdownId">
-                <a className="dropdown-item" href="#">
-                  Action 1
-                </a>
-                <a className="dropdown-item" href="#">
-                  Action 2
-                </a>
-              </div>
-            </li>
           </ul>
-          <div className="d-flex my-2 my-lg-0">
+          <div
+            className="d-flex align-items-center"
+            style={{
+              gap: 10,
+            }}
+          >
             {user ? (
               <>
-                {user.email}
-                <button className="btn" onClick={logOut}>
+                <span className="text-light">{user.email}</span>
+
+                <button className="btn btn-sm btn-light" onClick={logOut}>
                   Logout
                 </button>
               </>
             ) : (
-              <button className="btn" onClick={logIn}>
+              <button className="btn btn-sm btn-light" onClick={logIn}>
                 login
               </button>
             )}

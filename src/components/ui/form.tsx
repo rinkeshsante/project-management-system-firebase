@@ -2,8 +2,8 @@ type Props = {};
 
 export default function form({}: Props) {
   return (
-    <div>
-      <h1></h1>
+    <div className="">
+      <h1>forms</h1>
     </div>
   );
 }
