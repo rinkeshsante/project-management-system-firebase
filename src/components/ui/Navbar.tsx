@@ -1,9 +1,24 @@
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { Link } from "react-router-dom";
 import useUser from "../../hooks/useUser";
 
 export default function Navbar() {
   const provider = new GoogleAuthProvider();
   const { user, auth } = useUser();
+
+  const links: {
+    title: string;
+    url: string;
+  }[] = [
+    {
+      title: "Home",
+      url: "/",
+    },
+    {
+      title: "Projects",
+      url: "/project",
+    },
+  ];
 
   function logIn() {
     signInWithPopup(auth, provider)
@@ -27,9 +42,7 @@ export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
       <div className="container">
-        <a className="navbar-brand" href="#">
-          Navbar
-        </a>
+        <a className="navbar-brand">Navbar</a>
         <button
           className="navbar-toggler d-lg-none"
           type="button"
@@ -43,16 +56,13 @@ export default function Navbar() {
         </button>
         <div className="collapse navbar-collapse" id="collapsibleNavId">
           <ul className="navbar-nav me-auto mt-2 mt-lg-0">
-            <li className="nav-item">
-              <a className="nav-link active" href="#" aria-current="page">
-                Home <span className="visually-hidden">(current)</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Link
-              </a>
-            </li>
+            {links.map((link) => (
+              <li className="nav-item" key={link.title}>
+                <Link key={link.title} className="nav-link" to={link.url}>
+                  {link.title}
+                </Link>
+              </li>
+            ))}
           </ul>
           <div
             className="d-flex align-items-center"
