@@ -31,12 +31,12 @@ export default function UserProfile({}: Props) {
         <>
           <span className="text-light">{user.email}</span>
 
-          <button className="btn btn-sm btn-light" onClick={logOut}>
+          <button className="btn btn-sm btn-dark" onClick={logOut}>
             Logout
           </button>
         </>
       ) : (
-        <button className="btn btn-sm btn-light" onClick={logIn}>
+        <button className="btn btn-sm btn-dark" onClick={logIn}>
           login
         </button>
       )}
