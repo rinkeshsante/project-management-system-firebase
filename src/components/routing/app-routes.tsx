@@ -1,11 +1,16 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import useUser from "../../hooks/useUser";
-import Dashboard from "../features/dashboard/Dashboard";
-import ProjectDetails from "../features/projects/ProjectDetails";
-import ProjectForm from "../features/projects/ProjectForm";
-import ProjectList from "../features/projects/ProjectList";
+import Loader from "../ui/Loader";
 import Navbar from "../ui/Navbar";
 import NotFound from "./not-found";
+
+const Dashboard = lazy(() => import("../features/dashboard/Dashboard"));
+const ProjectDetails = lazy(
+  () => import("../features/projects/ProjectDetails")
+);
+const ProjectList = lazy(() => import("../features/projects/ProjectList"));
+const ProjectForm = lazy(() => import("../features/projects/ProjectForm"));
 
 type Props = {};
 
@@ -16,17 +21,19 @@ export default function AppRoutes({}: Props) {
     <BrowserRouter>
       <Navbar />
       <div className="container pt-2">
-        <Routes>
-          <Route path="/" element={<ProtectedRoute />}>
-            <Route index element={<Dashboard />} />
-            <Route path="/project" element={<ProjectList />} />
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="/" element={<ProtectedRoute />}>
+              <Route index element={<Dashboard />} />
+              <Route path="/project" element={<ProjectList />} />
 
-            <Route path="/project/add" element={<ProjectForm />} />
-            <Route path="/project/:id" element={<ProjectDetails />} />
+              <Route path="/project/add" element={<ProjectForm />} />
+              <Route path="/project/:id" element={<ProjectDetails />} />
 
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </Suspense>
       </div>
     </BrowserRouter>
   );

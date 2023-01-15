@@ -1,11 +1,4 @@
-import {
-  getAuth,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-  signInWithPopup,
-  signOut,
-  User,
-} from "firebase/auth";
+import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import { useState } from "react";
 
 export default function useUser() {

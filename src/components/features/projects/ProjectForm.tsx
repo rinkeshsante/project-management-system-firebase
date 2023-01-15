@@ -1,7 +1,10 @@
 type Props = {};
+import { async } from "@firebase/util";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import useAddQuery from "../../../hooks/useAddQuery";
 import CardContainer from "../../ui/CardContainer";
-import FormInput from "../../ui/FormInput";
+import FormInput from "../../ui/form/FormInput";
 import { IProject } from "./model";
 
 export default function ProjectForm({}: Props) {
@@ -12,7 +15,16 @@ export default function ProjectForm({}: Props) {
     formState: { errors },
   } = useForm<IProject>();
 
-  const onSubmit: SubmitHandler<IProject> = (data) => console.log(data);
+  const navigate = useNavigate();
+
+  const onSubmit: SubmitHandler<IProject> = (data) => {
+    useAddQuery({
+      collectionName: "projects",
+      data,
+    }).then(() => {
+      navigate("/project");
+    });
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -32,9 +44,8 @@ export default function ProjectForm({}: Props) {
 
         <FormInput
           {...{ register, errors }}
-          name={"assignee"}
-          type={"select"}
-          options={["one", "two"]}
+          name={"deadline"}
+          type={"Date"}
           validations={{ required: true }}
         />
       </CardContainer>

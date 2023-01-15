@@ -1,11 +1,28 @@
+import {
+  collection,
+  getFirestore,
+  limit,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { Link } from "react-router-dom";
+import useReadQuery from "../../../hooks/useReadQuery";
 import CardContainer from "../../ui/CardContainer";
-import { projects } from "./model";
+import Loader from "../../ui/Loader";
+import { IProject } from "./model";
 import ProjectCard from "./ProjectCard";
 
-type Props = {};
+export default function ProjectList() {
+  const projectQuery = query(
+    collection(getFirestore(), "projects"),
+    orderBy("heading"),
+    limit(6)
+  );
 
-export default function ProjectList({}: Props) {
+  const { data, loading } = useReadQuery<IProject>(projectQuery);
+
+  if (loading) return <Loader />;
+
   return (
     <>
       <CardContainer
@@ -16,7 +33,7 @@ export default function ProjectList({}: Props) {
           </Link>
         }
       >
-        {projects?.map((project) => (
+        {data?.map((project) => (
           <ProjectCard project={project} key={project.id} />
         ))}
       </CardContainer>

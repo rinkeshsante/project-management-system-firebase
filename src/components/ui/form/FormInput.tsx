@@ -1,4 +1,4 @@
-import { camelCaseToSentenceCase } from "../../utils";
+import { camelCaseToSentenceCase } from "../../../utils/cases";
 
 type Props = {
   register: any;
@@ -30,7 +30,7 @@ export default function FormInput({
         return (
           <select
             defaultValue={""}
-            className="form-control form-control-sm"
+            className="form-select form-control-sm"
             {...register(name, validations)}
           >
             <option value={""} disabled>
@@ -49,7 +49,6 @@ export default function FormInput({
           <textarea
             className="form-control form-control-sm"
             {...register(name, validations)}
-            type={type || "text"}
           />
         );
       default:
