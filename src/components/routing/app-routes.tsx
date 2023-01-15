@@ -7,6 +7,7 @@ import ProjectForm from "../features/projects/ProjectForm";
 import ProjectList from "../features/projects/ProjectList";
 import CreateForm from "../ui/form/CreateForm";
 import EditForm from "../ui/form/EditForm";
+import Loader from "../ui/Loader";
 import Navbar from "../ui/Navbar";
 import NotFound from "./not-found";
 
@@ -50,6 +51,6 @@ export default function AppRoutes({}: Props) {
   );
 
   function ProtectedRoute() {
-    return <>{user ? <Outlet /> : <>Loading...</>}</>;
+    return <>{user ? <Outlet /> : <Loader />}</>;
   }
 }
