@@ -4,13 +4,6 @@ import CardContainer from "../../ui/CardContainer";
 import FormInput from "../../ui/FormInput";
 import { IProject } from "./model";
 
-type Inputs = {
-  example: string;
-  exampleRequired: string;
-  date: Date;
-  time: Date;
-};
-
 export default function ProjectForm({}: Props) {
   const {
     register,
@@ -26,22 +19,23 @@ export default function ProjectForm({}: Props) {
       <CardContainer>
         <FormInput
           {...{ register, errors }}
-          name={"exampleRequired"}
+          name={"heading"}
           validations={{ required: true }}
         />
 
         <FormInput
           {...{ register, errors }}
-          name={"date"}
-          validations={{ required: true }}
-          type="date"
+          name={"description"}
+          type={"textarea"}
+          validations={{}}
         />
 
         <FormInput
           {...{ register, errors }}
-          name={"time"}
+          name={"assignee"}
+          type={"select"}
+          options={["one", "two"]}
           validations={{ required: true }}
-          type="time"
         />
       </CardContainer>
       <input type="submit" />

@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import NotFound from "../../routing/not-found";
 import BreadCrumb from "../../ui/BreadCrumb";
 import DataDetails from "../../ui/DataDetails";
+import FeatureList from "../features/FeatureList";
 import { IProject, projects } from "./model";
 
 type Props = {};
@@ -26,6 +27,7 @@ export default function ProjectDetails({}: Props) {
         ]}
       />
       <DataDetails item={project} />
+      <FeatureList />
     </div>
   );
 }

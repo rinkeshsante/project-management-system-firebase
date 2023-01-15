@@ -24,30 +24,52 @@ export default function FormInput({
   options,
   span,
 }: Props) {
+  function getInputType() {
+    switch (type) {
+      case "select":
+        return (
+          <select
+            defaultValue={""}
+            className="form-control form-control-sm"
+            {...register(name, validations)}
+          >
+            <option value={""} disabled>
+              ---
+            </option>
+
+            {options?.map((option) => (
+              <option key={option} value={option}>
+                {camelCaseToSentenceCase(option)}
+              </option>
+            ))}
+          </select>
+        );
+      case "textarea":
+        return (
+          <textarea
+            className="form-control form-control-sm"
+            {...register(name, validations)}
+            type={type || "text"}
+          />
+        );
+      default:
+        return (
+          <input
+            className="form-control form-control-sm"
+            {...register(name, validations)}
+            type={type || "text"}
+          />
+        );
+    }
+  }
+
   return (
-    <div className="row p-3">
+    <div className="col p-3 justify-content-start">
       <label className="form-label">
         {camelCaseToSentenceCase(name)}
         {validations?.required && "*"}
       </label>
-
-      {type === "select" ? (
-        <select
-          className="form-control form-control-sm"
-          {...register(name, validations)}
-        >
-          {options?.map((option) => (
-            <option value={option}>{camelCaseToSentenceCase(option)}</option>
-          ))}
-        </select>
-      ) : (
-        <input
-          className="form-control form-control-sm"
-          {...register(name, validations)}
-          type={type || "text"}
-        />
-      )}
-
+      {getInputType()}
       {errors[name] && <div className="small text-danger">Invalid Input</div>}
     </div>
   );

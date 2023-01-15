@@ -1,10 +1,12 @@
-export interface Issue {
+import { IModified } from "./modified";
+export interface IIssue extends IModified {
   id: string;
   heading: string;
   assignee: string;
   creation_date: Date;
-  late_modified: Date;
+
+  description?: string;
 
   discussion?: string;
-  description?: string;
+  logs?: string;
 }
