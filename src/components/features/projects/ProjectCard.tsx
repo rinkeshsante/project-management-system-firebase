@@ -10,11 +10,15 @@ export default function ProjectCard({ project }: Props) {
   return (
     <Card
       title={project.heading}
-      body={`started at:${project.creation_date}, last Modified: ${project.last_modified}`}
+      footer={
+        <NavLink to={"/project/" + project.id}>
+          <button className="btn btn-primary btn-sm">More</button>
+        </NavLink>
+      }
     >
-      <NavLink to={"/project/" + project.id}>
-        {<button className="btn btn-primary btn-sm">More...</button>}
-      </NavLink>
+      deadline: {project.deadline}
+      <br />
+      {project.description}
     </Card>
   );
 }

@@ -1,28 +1,27 @@
+import { FC } from "react";
 import { useParams } from "react-router-dom";
 import useDoc from "../../../hooks/useDoc";
 import NotFound from "../../routing/not-found";
-import BreadCrumb from "../../ui/BreadCrumb";
-import DataDetails from "../../ui/DataDetails";
 import Loader from "../../ui/Loader";
+import BreadCrumb from "../BreadCrumb";
 
-type Props = {};
-
-export default function FeatureDetails({}: Props) {
+type Props = {
+  FormComponent: any;
+  collectionName: string;
+};
+export default function EditForm({ FormComponent, collectionName }: Props) {
   const { id: _id } = useParams();
   const id = _id?.toString() || "";
 
-  const { data: feature, loading } = useDoc({
-    collectionName: "features",
+  const { data: project, loading } = useDoc({
+    collectionName: collectionName,
     id,
   });
 
   if (loading) return <Loader />;
-  console.log(feature);
-
-  if (feature === null) return <NotFound />;
-
+  if (!loading && project === null) return <NotFound />;
   return (
-    <div>
+    <>
       <BreadCrumb
         links={[
           {
@@ -34,10 +33,7 @@ export default function FeatureDetails({}: Props) {
           },
         ]}
       />
-      <DataDetails
-        item={feature}
-        headers={["id", "heading", "description", "deadline"]}
-      />
-    </div>
+      <FormComponent defaults={project} />
+    </>
   );
 }

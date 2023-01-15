@@ -15,8 +15,8 @@ import ProjectCard from "./ProjectCard";
 export default function ProjectList() {
   const projectQuery = query(
     collection(getFirestore(), "projects"),
-    orderBy("heading"),
-    limit(6)
+    orderBy("heading")
+    // limit(6)
   );
 
   const { data, loading } = useReadQuery<IProject>(projectQuery);

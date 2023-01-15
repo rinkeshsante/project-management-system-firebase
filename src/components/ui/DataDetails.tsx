@@ -7,12 +7,12 @@ export default function DataDetails({ headers, item }: Props) {
   const keys = headers === undefined ? Object.keys(item) : headers;
 
   return (
-    <table>
+    <table className="table table-borderless table-sm">
       <tbody>
         {keys.map((key: any) => (
           <tr key={key}>
             <td>{key}</td>
-            <td>:{item[key].toString() || ""}</td>
+            <td>{item[key].toString() || ""}</td>
           </tr>
         ))}
       </tbody>

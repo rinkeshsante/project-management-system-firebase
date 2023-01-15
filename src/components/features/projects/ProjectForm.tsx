@@ -1,5 +1,4 @@
-type Props = {};
-import { async } from "@firebase/util";
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import useAddQuery from "../../../hooks/useAddQuery";
@@ -7,13 +6,21 @@ import CardContainer from "../../ui/CardContainer";
 import FormInput from "../../ui/form/FormInput";
 import { IProject } from "./model";
 
-export default function ProjectForm({}: Props) {
+type Props = {
+  defaults?: Partial<any>;
+};
+
+export default function ProjectForm({ defaults }: Props) {
   const {
     register,
     handleSubmit,
-    // watch,
     formState: { errors },
+    reset,
   } = useForm<IProject>();
+
+  useEffect(() => {
+    reset({ ...defaults });
+  }, [defaults]);
 
   const navigate = useNavigate();
 
@@ -21,8 +28,10 @@ export default function ProjectForm({}: Props) {
     useAddQuery({
       collectionName: "projects",
       data,
-    }).then(() => {
-      navigate("/project");
+      key: defaults?.id || undefined,
+    }).then((key) => {
+      console.log(key);
+      navigate("/project/" + key);
     });
   };
 
