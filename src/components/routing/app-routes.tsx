@@ -23,7 +23,7 @@ export default function AppRoutes({}: Props) {
   return (
     <BrowserRouter>
       <Navbar />
-      <div className="container pt-2">
+      <div className="container pt-2 pb-4">
         <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<ProtectedRoute />}>

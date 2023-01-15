@@ -1,11 +1,7 @@
-import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
-import useUser from "../../hooks/useUser";
+import UserProfile from "../features/user/UserProfile";
 
 export default function Navbar() {
-  const provider = new GoogleAuthProvider();
-  const { user, auth } = useUser();
-
   const links: {
     title: string;
     url: string;
@@ -19,25 +15,6 @@ export default function Navbar() {
       url: "/project",
     },
   ];
-
-  function logIn() {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential?.accessToken;
-        const user = result.user;
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.customData.email;
-        const credential = GoogleAuthProvider.credentialFromError(error);
-      });
-  }
-
-  function logOut() {
-    signOut(auth);
-  }
 
   return (
     <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
@@ -70,19 +47,7 @@ export default function Navbar() {
               gap: 10,
             }}
           >
-            {user ? (
-              <>
-                <span className="text-light">{user.email}</span>
-
-                <button className="btn btn-sm btn-light" onClick={logOut}>
-                  Logout
-                </button>
-              </>
-            ) : (
-              <button className="btn btn-sm btn-light" onClick={logIn}>
-                login
-              </button>
-            )}
+            <UserProfile />
           </div>
         </div>
       </div>

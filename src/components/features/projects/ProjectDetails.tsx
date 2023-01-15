@@ -7,6 +7,7 @@ import DataDetails from "../../ui/DataDetails";
 import DeleteModal from "../../ui/form/DeleteModal";
 import Heading from "../../ui/Heading";
 import Loader from "../../ui/Loader";
+import Discussion from "../discussion/Discussion";
 import FeatureListView from "../features/FeatureListView";
 
 type Props = {};
@@ -66,7 +67,12 @@ export default function ProjectDetails({}: Props) {
         headers={["id", "heading", "deadline", "description"]}
       />
 
+      <hr />
+
       <FeatureListView />
+
+      <hr />
+      <Discussion />
     </div>
   );
 }
